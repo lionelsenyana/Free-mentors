@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <style>
+            body {
+                  background-color: #AF877F;
+            }
+
+            h2 {
+                  color: solid black;
+                  text-align: center;
+            }
+
+            input {
+                  width: 30%;
+                  margin-top: 30px;
+                  padding: 5px 5px;
+            }
+
+            #inputSection {
+                  text-align: center;
+            }
+      </style>
+      <script>
+            function processListOfUsers() {
+                  window.location.assign("admin-list-users.html");
+            }
+
+            function processListOfMentors() {
+                  window.location.assign("admin-list-mentors.html");
+            }
+
+            function processChangeUserToMentor() {
+                  window.location.assign("admin-change-user-type.html");
+            }
+      </script>
+</head>
+
+<body>
+      <div id="inputSection">
+            <h2>Admin</h2>
+
+            <input type="button" id="listOfUsers" value="List of users" onclick="processListOfUsers()" />
+            <br>
+            <input type="button" id="listOfMentors" value="List of mentors" onclick="processListOfMentors()" />
+            <br>
+            <input type="button" id="changeUserToMentor" value="Change user to a mentor"
+                  onclick="processChangeUserToMentor()" />
+      </div>
+</body>
+
+</html>

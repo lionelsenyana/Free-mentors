@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      background-color: #AF877F;
+    }
+
+    h2 {
+      color: solid black;
+      text-align: center;
+    }
+
+    #loginSection {
+      text-align: center;
+    }
+
+    label,
+    input {
+      display: inline-block;
+    }
+
+    label {
+      width: 15%;
+      text-align: left;
+    }
+
+    input {
+      width: 40%;
+      margin-top: 10px;
+      padding: 5px 5px;
+    }
+
+    button {
+      margin-top: 30px;
+      text-align: center;
+      padding: 10px 50px;
+    }
+  </style>
+
+  <script>
+    function validateAndSubmit() {
+      var userNameEmail = document.getElementById("userNameEmail").value;
+      if ( ! userNameEmail) {
+        alert("Missing User Name as Email");
+        return false;
+      } else if ( ! userNameEmail.includes("@")) {
+        alert("Your email is missing'@'");
+        return false;
+      } else if(userNameEmail !== JSON.parse(localStorage.getItem('user')).email
+          && userNameEmail !== JSON.parse(localStorage.getItem('mentor')).email
+          && userNameEmail !== JSON.parse(localStorage.getItem('admin')).email ) {
+            alert("Invalid credentials");
+            return false;
+      }
+
+      var password =
+        document.getElementById("password").value;
+      if (checkPassword(password) == false) {
+        return false;
+      }
+
+      /*
+       * Validate using locally stored data, since the Database is not ready yet:
+       */
+      var user = JSON.parse(localStorage.getItem('user'));
+      var mentor = JSON.parse(localStorage.getItem('mentor'));
+      var admin = JSON.parse(localStorage.getItem('admin'));
+      var credentialsErrorMessage = "Invalid credentials";
+
+      if(user && user.email == userNameEmail) {
+        if(user.password !== password) {
+          alert(credentialsErrorMessage);
+          return false;
+        }
+      } else if(mentor && mentor.email == userNameEmail) {
+        if(mentor.password !== password) {
+          alert(credentialsErrorMessage);
+          return false;
+        }
+      } else if(admin && admin.email == userNameEmail) {
+        if(admin.password !== password) {
+          alert(credentialsErrorMessage);
+          return false;
+        } 
+      }
+
+      window.location.assign("all-users.html");
+      
+      // return true; // this will signal for the form to submit. Comming up later on...
+    }
+
+    function checkPassword(password) {
+      if ( ! password) {
+        alert("Missing Password");
+        return false;
+      } 
+      return true;
+    }
+  </script>
+</head>
+
+<body>
+  <div id="loginSection">
+    <h2>Sign in</h2>
+    <form>
+      <label>User name/Email:</label>
+      <input type="text" id="userNameEmail">
+      <br>
+      <label>Password:</label>
+      <input type="password" id="password">
+      <br>
+      <button onclick=validateAndSubmit() type="button" id="logIn">Log in</button>
+    </form>
+  </div>
+</body>
+
+</html>

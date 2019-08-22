@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <style>
+            body {
+                  background-color: #AF877F;
+            }
+
+            h2 {
+                  color: solid black;
+                  text-align: center;
+            }
+
+            input {
+                  width: 30%;
+                  margin-top: 30px;
+                  padding: 5px 5px;
+            }
+
+            #inputSection {
+                  text-align: center;
+            }
+      </style>
+      <script>
+            function processAcceptMentorshipSession() {
+                  window.location.assign("");
+            }
+
+            function processDeclineMentorshipSession() {
+                  window.location.assign("");
+            }
+      </script>
+</head>
+
+<body>
+      <div id="inputSection">
+            <h2>Mentor</h2>
+
+            <input type="button" id="acceptMentorshipSession" value="Accept a mentorship session request"
+                  onclick="processAcceptMentorshipSession()" />
+            <br>
+            <input type="button" id="declineMentorshipSession" value="Decline a mentorship session request"
+                  onclick="processDeclineMentorshipSession()" />
+
+      </div>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <style>
+            body {
+                  background-color: #AF877F;
+            }
+
+            h2 {
+                  text-align: center;
+            }
+
+            ol li {
+                  list-style-type: Times-Newroman;
+                  margin-left: 400px;
+                  padding: 8px;
+            }
+      </style>
+      <script>
+            function populateSpecificMentors() {
+                  /*
+                   * Since we do not have back-end let's assume 
+                   * some hard-coded specific mentors for now.  We will
+                   * replace once back-end is available
+                   */
+                  var allSpecificMentors = [
+                        "Joe Doe",
+                        "Jane Smith"
+                  ];
+                  // let's assume the specific mentors variable is coming from back-end
+                  if (allSpecificMentors) {
+                        var orderListOfSpecificMentors =
+                              document.createElement('ol');
+
+                        for (var i = 0; i < allSpecificMentors.length; i++) {
+                              var currentSpecificMentorElment =
+                                    document.createElement('li');
+                              currentSpecificMentorElment.appendChild(
+                                    document.createTextNode(allSpecificMentors[i]));
+                              orderListOfSpecificMentors.appendChild(currentSpecificMentorElment);
+                        }
+                        document.getElementById("specificMentorsSection").appendChild(orderListOfSpecificMentors);
+                  }
+            }
+      </script>
+</head>
+
+<body onload="populateSpecificMentors()">
+      <form>
+            <div>
+                  <h2>A list of specific mentors</h2>
+
+                  <div id="specificMentorsSection">
+                  </div>
+            </div>
+      </form>
+</body>
+
+</html>

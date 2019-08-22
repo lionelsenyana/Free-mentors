@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <style>
+            body {
+                  background-color: #AF877F;
+            }
+
+            h2 {
+                  color: solid black;
+                  text-align: center;
+            }
+
+            p {
+                  color: solid grey;
+                  text-align: center;
+            }
+
+            form,
+            button {
+                  display: inline-block;
+            }
+
+            form {
+                  color: grey;
+            }
+
+            button {
+                  margin-top: 10px;
+                  padding: 10px 50px;
+            }
+
+            #actionSection {
+                  text-align: center;
+            }
+      </style>
+      <script>
+            /*
+             * Since we do not have back-end let's assume 
+             * some hard-coded users for now.  We will
+             * replace once back-end is available
+             */
+            var allUsers = [
+                  "Joe Doe",
+                  "Jane Smith"
+            ];
+
+            function changeToMentor() {
+                  var user = localStorage.getItem("user");
+                  if(user) {
+                        localStorage.removeItem("user");
+                        localStorage.setItem("mentor", user);
+                  }
+            }
+      </script>
+</head>
+
+<body>
+      <div id="actionSection">
+            <h2>Select a user</h2>
+            <p>Change user to a mentor:</p>
+            <form action="">
+                  <select name="users">
+                        <option value="">Joe Doe</option>
+                        <option value="">Jane Smith</option>
+                        <option value=""></option>
+                  </select>
+                  <br><br>
+                  <button id="submit" onclick="changeToMentor()">change user to a mentor</button>
+            </form>
+      </div>
+      <div id="usersSection">
+      </div>
+</body>
+
+</html>

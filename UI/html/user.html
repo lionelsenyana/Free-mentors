@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      background-color: #AF877F;
+    }
+
+    h2 {
+      color: solid black;
+      text-align: center;
+    }
+
+    input {
+      width: 30%;
+      margin-top: 30px;
+      padding: 5px 5px;
+    }
+
+    #inputSection {
+      text-align: center;
+    }
+  </style>
+
+  <script>
+    function processViewMentors() {
+      window.location.assign("view-mentors.html");
+    }
+
+    function processViewSpecificMentors() {
+      window.location.assign("view-specific-mentors.html");
+    }
+
+    function processCreateMentorshipSession() {
+      window.location.assign("create-mentorship-session.html");
+    }
+  </script>
+</head>
+
+<body>
+  <div id="inputSection">
+    <h2>User</h2>
+    <input type="button" id="viewMentors" value="View mentors" onclick="processViewMentors()" />
+    <br>
+    <input type="button" id="viewSpecificMentors" value="View specific mentors"
+      onclick="processViewSpecificMentors()" />
+    <br>
+    <input type="button" id="createMentorshipSession" value="Create a mentorship session request with a mentor"
+      onclick="processCreateMentorshipSession()" />
+  </div>
+</body>
+
+</html>

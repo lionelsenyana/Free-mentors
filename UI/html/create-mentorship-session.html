@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <style>
+            body {
+                  background-color: #AF877F;
+            }
+
+            h2 {
+                  text-align: center;
+            }
+
+            form,
+            button {
+                  display: inline-block;
+            }
+
+            form {
+                  color: grey;
+            }
+
+            button {
+                  margin-top: 10px;
+                  padding: 10px 50px;
+            }
+
+            #actionSection {
+                  text-align: center;
+            }
+      </style>
+      <script>
+            /*
+             * Since we do not have back-end let's assume 
+             * some hard-coded mentors for now.  We will
+             * replace once back-end is available
+             */
+            var allMentors = [
+                  "Joe Doe",
+                  "Jane Smith"
+            ];
+            function sendMentorshipRequest() {
+                  // let's assume the mentors variable is coming from back-end
+                  if (allMentors) {
+                        var orderListOfMentors =
+                              document.createElement('ol');
+
+                        for (var i = 0; i < allMentors.length; i++) {
+                              var currentMentorElment =
+                                    document.createElement('li');
+                              currentMentorElment.appendChild(
+                                    document.createTextNode(allMentors[i]));
+                              orderListOfMentors.appendChild(currentMentorElment);
+                        }
+                        document.getElementById("mentorsSection").appendChild(orderListOfMentors);
+                  }
+            }
+      </script>
+</head>
+
+<body>
+      <div id="actionSection">
+            <h2>A list of mentors</h2>
+            <form action="">
+                  <select name="users">
+                        <option value="">Joe Doe</option>
+                        <option value="">Jane Smith</option>
+                  </select>
+                  <br><br>
+
+                  <button id="sendRequest" onclick=sendMentorshipRequest()>Send request</button>
+      </div>
+      <div id="mentorsSection">
+      </div>
+</body>
+
+</html>

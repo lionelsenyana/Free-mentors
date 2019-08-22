@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <style>
+            body {
+                  background-color: #AF877F;
+            }
+
+            h2 {
+                  text-align: center;
+            }
+
+            ol li {
+                  list-style-type: Times-Newroman;
+                  margin-left: 400px;
+                  padding: 8px;
+            }
+
+            form {
+                  margin-left: 450px;
+                  color: solid grey;
+            }
+
+            input,
+            button {
+                  display: inline-block;
+            }
+
+            input {
+                  width: 40%;
+                  margin-top: 10px;
+                  padding: 5px 5px;
+            }
+
+            button {
+                  margin-top: 30px;
+                  padding: 10px 50px;
+            }
+
+            #listOfUsersSection {
+                  text-align: center;
+            }
+      </style>
+      <script>
+            /*
+             * Since we do not have back-end let's assume 
+             * some hard-coded users for now.  We will
+             * replace once back-end is available
+             */
+            var allUsers = [
+                  "Joe Doe",
+                  "Jane Smith"
+            ];
+            // let's assume the users variable is coming from back-end
+
+            var orderListOfUsers = null;
+            var initialLoad = true;
+
+            function populateUsers() {
+                  // alert("About to load users");
+                  if (allUsers) {
+                        // add the user dynamically registered earlier:
+                        if(initialLoad == true && localStorage.getItem("user")) {
+                              allUsers.push(localStorage.getItem("user").email);
+                              initialLoad = false;
+                        }
+                        orderListOfUsers =
+                              document.createElement('ol');
+
+                        for (var i = 0; i < allUsers.length; i++) {
+                              var currentUserElment =
+                                    document.createElement('li');
+                              currentUserElment.appendChild(
+                                    document.createTextNode(allUsers[i]));
+                              orderListOfUsers.appendChild(currentUserElment);
+                        }
+                        document.getElementById("usersSection").appendChild(orderListOfUsers);
+                  }
+            }
+
+            function addUser() {
+                  var fullName =
+                        document.getElementById("name").value;
+                  if (!fullName) {
+                        alert("Name cannot be empty");
+                  } else {
+                        var names = fullName.split(" ");
+                        if (!names || names.length < 2) {
+                              alert("First Name and Last Name required");
+                        } else {
+                              document.getElementById("usersSection").removeChild(orderListOfUsers);
+                              allUsers.push(fullName);
+                              populateUsers();
+                              document.getElementById("name").value = "";
+                        }
+                        return false;
+                  }
+                  return false;
+            }
+      </script>
+</head>
+
+<body onload="populateUsers()">
+      <div>
+            <h2>A list of users</h2>
+
+            <div id="usersSection">
+            </div>
+            <div id="listOfUsersSection">
+                  <!--<form>-->
+                  <input type="name" id="name" />
+                  <button id="add" value="Add" onclick=addUser()>Add</button>
+                  <!--</form> -->
+            </div>
+      </div>
+</body>
+
+</html>
