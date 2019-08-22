@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      background-color: #AF877F;
+    }
+
+    h2 {
+      color: solid black;
+      text-align: center;
+    }
+
+    h3 {
+      color: solid grey;
+      text-align: center;
+    }
+
+    label,
+    input {
+      display: inline-block;
+    }
+
+    label {
+      width: 15%;
+      text-align: left;
+    }
+
+    input {
+      width: 40%;
+      margin-top: 10px;
+      padding: 5px 5px;
+    }
+
+    button {
+      margin-top: 30px;
+      text-align: center;
+      padding: 10px 50px;
+    }
+
+    #formSection {
+      text-align: center;
+    }
+  </style>
+
+  <script>
+    function validateAndSubmit() {
+      var userNameEmail = document.getElementById("userNameEmail").value;
+      if (!userNameEmail) {
+        alert("Missing User Name as Email");
+        return false;
+      } else if (!userNameEmail.includes("@")) {
+        alert("Your email is missing'@'");
+        return false;
+      }
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+      if (!password) {
+        alert("Missing password");
+        return false;
+      } else if (!confirmPassword) {
+        alert("Missing confirmation");
+        return false;
+      } else if (password !== confirmPassword) {
+        alert("password doesn't match");
+        return false;
+      }
+      var password = document.getElementById("password").value;
+      if (checkPassword(password) == false) {
+        return false;
+      }
+      /*
+       * TODO: Should be submitting to back-end.
+       * However, because the back-end is not available yet, let's assume that all admins
+       * will have an email that starts with admin followed by a a number
+       */
+      var freeMentorAppUser = null;
+      
+      // // // This is used to temporarily clear the local storage, while waiting for back-end to be implemented:
+      // localStorage.removeItem('user');
+      // localStorage.removeItem('mentor');
+      // localStorage.removeItem('admin');
+
+      var profile = {};
+      profile.email = userNameEmail;
+      profile.password = password;
+
+      if(userNameEmail.startsWith('admin')) {
+        localStorage.setItem('admin', JSON.stringify(profile));
+      }
+      else {
+        localStorage.setItem('user', JSON.stringify(profile));
+      }     
+      window.location.assign("all-users.html");
+      // return true; // TODO: this will signal for the form to submit. Comming up later on...
+    }
+
+    function checkPassword(password) {
+      if (!password) {
+        alert("Missing Password");
+        return false;
+      }
+      if (password.length < 6) {
+        alert("Password should be at least 6 characters");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+
+<body>
+  <div id="formSection">
+    <h2>Sign up</h2>
+    <h3>Create account</h3>
+    <form>
+      <label>User name/Email:</label>
+      <input type="text" id="userNameEmail">
+      <br>
+      <label>Password:</label>
+      <input type="password" id="password">
+      <br>
+      <label>Confirm password:</label>
+      <input type="password" id="confirmPassword">
+      <br>
+      <!-- Once the back-end is ready, the submit will be restored:
+    <button onclick="validateAndSubmit()" type="submit" id="submit">Submit</button>
+  -->
+      <button onclick="validateAndSubmit()" type="button" id="submit">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>
