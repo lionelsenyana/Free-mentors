@@ -38,3 +38,29 @@ describe('User should get all mentors', () => {
       });
   });
 });
+
+describe('User should get a specific mentor', () => {
+    it('Expect to get a specific mentor', (done) => {
+      chai.request(server)
+        .get('/api/v1/mentor/' + mentor.mentorId)
+        .set('token',global.savedUser.token)
+        .send()
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+    it('Expect to fail to get a specific mentor', (done) => {
+      chai.request(server)
+        .get('/api/v1/mentor/' + mentor.mentorId)
+        .send()
+        .end((err, res) => {
+          console.log(res.body);
+          
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+  });
