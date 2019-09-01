@@ -7,7 +7,8 @@
     "test-via-babel": "mocha 'server/tests/**/*.js' --require @babel/polyfill --require @babel/register --timeout 10000 --exit",
     "test": "nyc --reporter=text --reporter=html mocha server/tests/manage.js --require @babel/polyfill --require @babel/register --timeout 10000 --exit",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "dev": "nodemon --exec babel-node app.js"
+    "dev": "nodemon --exec babel-node app.js",
+    "start": "babel-node app.js"
   },
   "repository": {
     "type": "git",
