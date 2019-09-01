@@ -12,10 +12,23 @@ Free Mentors is a social initiative to provide free mentorship sessions.
 
 Download a browser : Chrome
 Download a text Editor : Visual Studio Code 
- 
+## Running the tests
+
+run test by npm test
+
+### Break down into end to end tests
+
+The test is for API endpoints: authorization routes, user route, session routes, and mentor routes
+
+```
+signup test: it expects signup to pass
+```
+
+### And coding style tests
+
+These tests test whether the request and response reach the end-points.
 
 ## Authors
-
 * **Lionel Senyana** - *created UI for Free-mentors* - [UI Templates](https://lionelsenyana.github.io/LionelSenyana_Free-mentors/UI)
 
 
