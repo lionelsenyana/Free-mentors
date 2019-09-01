@@ -1,4 +1,4 @@
-# Free-Mentors  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+# Free-Mentors  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Coverage Status](https://coveralls.io/repos/github/lionelsenyana/LionelSenyana_Free-mentors/badge.svg?branch=develop)](https://coveralls.io/github/lionelsenyana/LionelSenyana_Free-mentors?branch=develop) [![Build Status](https://travis-ci.org/lionelsenyana/LionelSenyana_Free-mentors.svg?branch=develop)](https://travis-ci.org/lionelsenyana/LionelSenyana_Free-mentors) [![Maintainability](https://api.codeclimate.com/v1/badges/c631e6e6f0d636f202ec/maintainability)](https://codeclimate.com/github/lionelsenyana/LionelSenyana_Free-mentors/maintainability)
 
 Free Mentors is a social initiative to provide free mentorship sessions.
 

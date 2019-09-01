@@ -20,33 +20,17 @@
 
   <script>
     function processUser() {
-      var user = localStorage.getItem("user");
-      if(user) {
-        console.log("email is [" + JSON.parse(user).email + "]");
-        window.location.assign("user.html");
-      } else {
-        alert("The system does not have any users yet");
-      }
+      window.location.assign("user.html");
     }
 
     function processMentor() {
-      var mentor = localStorage.getItem("mentor");
-      if(mentor) {
-        window.location.assign("mentor.html");
-      } else {
-        alert("The system does not have any mentors yet");
-      }
+      window.location.assign("mentor.html");
     }
 
     function processAdmin() {
-      var admin = localStorage.getItem("admin");
-      if(admin) {
-        console.log("email for the admin is [" + JSON.parse(admin).email + "]");
-        window.location.assign("admin.html");
-      } else {
-        alert("The system does not have any admins yet");
-      }
+      window.location.assign("admin.html");
     }
+
   </script>
 </head>
 

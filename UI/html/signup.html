@@ -66,34 +66,55 @@
         alert("password doesn't match");
         return false;
       }
-      var password = document.getElementById("password").value;
+      // var password = document.getElementById("password").value;
       if (checkPassword(password) == false) {
         return false;
       }
+
       /*
-       * TODO: Should be submitting to back-end.
-       * However, because the back-end is not available yet, let's assume that all admins
-       * will have an email that starts with admin followed by a a number
+       * prepare and make RESTful AJAX call for user sign up:
        */
-      var freeMentorAppUser = null;
-      
-      // // // This is used to temporarily clear the local storage, while waiting for back-end to be implemented:
-      // localStorage.removeItem('user');
-      // localStorage.removeItem('mentor');
-      // localStorage.removeItem('admin');
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) { // it is 4 when received response from server
+          if(this.status == 200) {
+            // Response came back with success, user is successfully registered
+            console.log("Message after user sign up: <" + this.responseText + ">");
+            var userSignedUp = JSON.parse(this.responseText);
+            if(userSignedUp && userSignedUp.status == 201) {
+              localStorage.setItem("token", userSignedUp.data.token);
+              window.location.assign("all-users.html");
+            }
+          } else {
+            console.log("Unable to complete sign up because: <" + this.responseText + ">");
+            alert("Unable to complete sign up because: <" + this.responseText + ">");
+          }
+        } 
+      };
+      xhttp.open("POST", "/api/v1/auth/signup", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
 
-      var profile = {};
-      profile.email = userNameEmail;
-      profile.password = password;
+      /*
+       * Follows JSON request object as indicated on page 13 of ADC pdf document.
+       * For now, this project is considering a few fields but others will be added later.
+       * Request format as indicated:
+       * {
+       *  "firstName": String,
+       *  "lastName": String,
+       *  "email": String,
+       *  "password": String,
+       *  "address": String,
+       *  "bio": String,
+       *  "occupation": String,
+       *  "expertise": String,
+       *  ...
+       * }
+       */
+      var newUser = {};
+      newUser.email = userNameEmail;
+      newUser.password = password;
 
-      if(userNameEmail.startsWith('admin')) {
-        localStorage.setItem('admin', JSON.stringify(profile));
-      }
-      else {
-        localStorage.setItem('user', JSON.stringify(profile));
-      }     
-      window.location.assign("all-users.html");
-      // return true; // TODO: this will signal for the form to submit. Comming up later on...
+      xhttp.send(JSON.stringify(newUser));
     }
 
     function checkPassword(password) {
@@ -124,9 +145,6 @@
       <label>Confirm password:</label>
       <input type="password" id="confirmPassword">
       <br>
-      <!-- Once the back-end is ready, the submit will be restored:
-    <button onclick="validateAndSubmit()" type="submit" id="submit">Submit</button>
-  -->
       <button onclick="validateAndSubmit()" type="button" id="submit">Submit</button>
     </form>
   </div>

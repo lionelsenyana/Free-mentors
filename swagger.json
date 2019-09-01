@@ -1,0 +1,115 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Free-Mentor",
+        "description": "Free Mentors is a social initiative to provide free mentorship sessions.",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "user registration"
+        },
+        {
+            "name": "Mentors",
+            "description": "Mentor user"
+        },
+        {
+            "name": "Sessions",
+            "description": "Manage sessions"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "create new user",
+                "parameters": [
+                    {
+                        "name": "users",
+                        "in": "body",
+                        "description": "user provide input",
+                        "schema": {
+                        "$ref": "#definitions/signup"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User succesfuly created"
+                    },
+                    "401": {
+                        "description": "Authentication error"
+                    }
+                }
+            }
+        },
+        "/auth/signin": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "login new user",
+                "parameters": [
+                    {
+                        "name": "users",
+                        "in": "body",
+                        "description": "user provide input",
+                        "schema": {
+                        "$ref": "#definitions/signin"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User is successfully logged in"
+                    },
+                    "401": {
+                        "description": "Authentication error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "signup": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "email" : {
+                    "type": "string"
+                },
+                "password": {
+                    "type":"string"
+                }
+            }
+        }
+    }
+    
+}

@@ -43,28 +43,22 @@
             }
       </style>
       <script>
+            
             /*
              * Since we do not have back-end let's assume 
              * some hard-coded users for now.  We will
              * replace once back-end is available
              */
-            var allUsers = [
+             var allUsers = [
                   "Joe Doe",
                   "Jane Smith"
             ];
-            // let's assume the users variable is coming from back-end
 
             var orderListOfUsers = null;
-            var initialLoad = true;
 
             function populateUsers() {
                   // alert("About to load users");
                   if (allUsers) {
-                        // add the user dynamically registered earlier:
-                        if(initialLoad == true && localStorage.getItem("user")) {
-                              allUsers.push(localStorage.getItem("user").email);
-                              initialLoad = false;
-                        }
                         orderListOfUsers =
                               document.createElement('ol');
 
