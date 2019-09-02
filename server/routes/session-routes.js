@@ -124,3 +124,45 @@ router.patch('/:sessionId/accept', function (req, res) {
     }
 });
 
+
+router.patch('/:sessionId/reject', function (req, res) {
+    res.set("Content-type", "application/json");
+    console.log('About to accept a session: <' + JSON.stringify(req.body) + '>');
+
+    var token = req.body.token; // token will be validated once database is ready
+    var mentorId = req.body.mentorId;
+
+    var allMentors = [mentor1, mentor2]; // Using hard-coded values since there is no database
+    
+    var isMentorFound = false;
+    var data = {};
+    allMentors.forEach(
+          (mentor) => {
+                if(mentor.mentorId === mentorId) {
+                      data.sessionId = uuid();
+                      data.mentorId = mentor.mentorId;
+                      data.status = "rejected";
+                      isMentorFound = true;
+                }
+          }
+    );
+    
+    if(global.savedUser.token === req.get('token') && isMentorFound == true) {
+          var specificMentorResponse = {};
+          specificMentorResponse.status = 200;
+          specificMentorResponse.data = data;
+    
+          res.status(200).send(specificMentorResponse);
+    } else {
+          var specificMentorResponse = {};
+          var data = {};
+          data.status = "failed";
+          data.message = "Unable to reject a session";
+          specificMentorResponse.data = data;
+    
+          res.status(401).send(specificMentorResponse);
+    }
+});
+
+
+module.exports = router;

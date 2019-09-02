@@ -67,3 +67,33 @@ describe('Mentor should accept a session', () => {
         });
     });
   });
+
+
+  /*
+ * 3) Tests for rejecting a session:
+ */
+describe('Mentor should reject a session', () => {
+    it('Expect to reject a session', (done) => {
+      chai.request(server)
+        .patch('/api/v1/sessions/' + global.savedUser.sessionId + '/reject')
+        .set('token', global.savedUser.token)
+        .send(mentor)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+    it('Expect to fail to reject a session', (done) => {
+      chai.request(server)
+        .patch('/api/v1/sessions/' + '12345' + '/reject')
+        .send(mentor)
+        .end((err, res) => {
+          console.log(res.body);
+          
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+  });
