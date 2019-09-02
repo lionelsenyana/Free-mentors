@@ -99,3 +99,79 @@ router.signUp = function (req) {
             }
       }
 }
+
+router.post('/signin', function(req, res) {
+    //set the header
+    res.set("Content-type", "application/json");
+    if(router.signIn(req)) {
+          //
+          var signinResponse =  {};
+          signinResponse.status = 200;
+          signinResponse.message = "User is successfully logged in";
+          var data = {};
+
+
+          //data.token = uuid();
+
+          const payload = {
+                "email": req.body.email,
+          }
+          const token = jwt.sign(payload, 'LIO', {expiresIn: '1d'})
+
+          data.token = token; 
+
+          global.savedUser.token = data.token;
+          data.message = "User is successfully logged in";
+
+          signinResponse.data = data;
+
+         return res.status(200).send(signinResponse);
+    } else {
+          var signinResponse =  {};
+          signinResponse.status = 401;
+          signinResponse.message = "Failed to log in new user";
+          return res.status(401).send(signinResponse);
+
+    }
+
+})
+
+router.signIn = function(req) {
+    //should return true/false
+
+    //algorithm
+    /*
+          1. get the username/email and password
+          2. filter user or admin depending on the user type base on the email
+          3. compare this filtered user passsowrd and the password in the request 
+          3.1. if password matcheds then return true 
+          3.2. if password doesn't match return false 
+    */
+    if(req && req.body) {
+          const authUser = req.body;
+          /*
+           * TODO: code below will be restored when database is in place
+           */
+     //      //filter user from user list (user)
+     //      const userData = user.find(function(u) {
+     //            return u.email === authUser.userNameEmail; // && u.password === authUser.password
+     //      });
+          if(global.savedUser && global.savedUser.email === authUser.email) {
+                console.log("saved email <" + global.savedUser.email + ">");
+                console.log("saved password <" + global.savedUser.password + ">");
+                // compare 
+                if(global.savedUser.password === authUser.password) {
+                      return true;
+                }
+                return false;
+          } else {
+                return false;
+          }
+     
+    }
+    else {
+          return false;
+    }
+}
+
+module.exports = router;

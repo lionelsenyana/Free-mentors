@@ -41,3 +41,31 @@ describe('User should signup', () => {
       });
   });
 });
+
+/*
+ * 2) Tests for sign in:
+ */
+describe('User should signin', () => {
+    it('Expect signin to pass', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signin')
+        .send(newUser)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+    it('Expect signin to fail', (done) => {
+      chai.request(server)
+        .post('/api/v1/auth/signin')
+        .send({})
+        .end((err, res) => {
+          console.log(res.body);
+          
+          expect(res).to.have.status(401);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+  });
