@@ -4,16 +4,31 @@
 <head>
   <style>
     body {
-      background-color: #AF877F;
+      background-image: url("../assets/image_background.jpg");
+      background-size: cover;
+      background-position: center;
     }
 
     h2 {
       color: solid black;
       text-align: center;
     }
-
+    .container {
+      background-color: black;
+      opacity: 0.8;
+      padding-top: 50px;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-bottom: 20px;
+      text-align: center;
+    }
     #loginSection {
       text-align: center;
+      border: 2px solid orange;
+      width: 50%;
+      background-color: orange;
+      display: inline-block;
+      margin-bottom: 220px;
     }
 
     label,
@@ -30,12 +45,18 @@
       width: 40%;
       margin-top: 10px;
       padding: 5px 5px;
+      font-weight: bold;
     }
-
+    #footer {
+      text-align: center;
+      color: white;
+      padding-bottom: 15px;
+    }
     button {
       margin-top: 30px;
       text-align: center;
       padding: 10px 50px;
+      margin-bottom: 20px;
     }
   </style>
 
@@ -105,17 +126,24 @@
 </head>
 
 <body>
-  <div id="loginSection">
-    <h2>Sign in</h2>
-    <form>
-      <label>User name/Email:</label>
-      <input type="text" id="userNameEmail">
-      <br>
-      <label>Password:</label>
-      <input type="password" id="password">
-      <br>
-      <button onclick=validateAndSubmit() type="button" id="logIn">Log in</button>
-    </form>
+  <div class="container">
+    <div id="loginSection">
+      <h2>Sign in</h2>
+      <form>
+        <input type="text" placeholder="userNameEmail">
+        <br>
+        <input type="password" placeholder="password">
+        <br>
+        <button onclick=validateAndSubmit() type="button" id="logIn">Log in</button>
+      </form>
+    </div>
+    <p id="footer">
+      
+        <small>
+          copyright 2019 by Lionel Senyana
+        </small>
+      
+    </p>
   </div>
 </body>
 
