@@ -36,6 +36,15 @@ input {
   background-color: lightgrey;
   border: 1px solid black;
 }
+.signin{
+  color: solid black;
+  font-weight: bold;
+}
+.signup{
+  background-color: rgb(43, 142, 223);
+  color:white;
+  font-weight: bold;
+}
 
 #landingPageSection {
   text-align: center;
