@@ -12,6 +12,10 @@
     "basePath": "/api/v1",
     "tags": [
         {
+            "name": "Authorization",
+            "description": "user registration"
+        },
+        {
             "name": "Users",
             "description": "user registration"
         },
@@ -38,7 +42,7 @@
         "/auth/signup": {
             "post": {
                 "tags": [
-                    "Users"
+                    "Authorization"
                 ],
                 "summary": "create new user",
                 "parameters": [
@@ -67,7 +71,7 @@
         "/auth/signin": {
             "post": {
                 "tags": [
-                    "Users"
+                    "Authorization"
                 ],
                 "summary": "login new user",
                 "parameters": [
@@ -94,6 +98,126 @@
             }
         }
     },
+    "/user/:userId": {
+        "post": {
+            "tags": [
+                "Users"
+            ],
+            "summary": "change user to a mentor",
+            "parameters": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                    "$ref": "#definitions/users"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "User account changed to a mentor"
+                },
+                "401": {
+                    "description": "Failed changing user to mentor. User is not authenticated"
+                }
+            }
+        }
+    },
+    "/mentor/mentors": {
+        "get": {
+            "tags": [
+                "mentors"
+            ],
+            "summary": "About to read all mentors",
+            "parameters": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                    "$ref": "#definitions/mentors"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "User is not authenticated"
+                }
+            }
+        }
+    },
+    "/mentor/:mentorId": {
+        "get": {
+            "tags": [
+                "mentors"
+            ],
+            "summary": "About to read a specific mentor with Id",
+            "parameters": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                    "$ref": "#definitions/mentors"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "User is not authenticated"
+                }
+            }
+        }
+    },
+    "/session/:mentorId": {
+        "get": {
+            "tags": [
+                "mentors"
+            ],
+            "summary": "About to read a specific mentor with Id",
+            "parameters": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                    "$ref": "#definitions/mentors"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "User is not authenticated"
+                }
+            }
+        }
+    },
+
+
+
+
     "definitions": {
         "signup": {
             "required": [
