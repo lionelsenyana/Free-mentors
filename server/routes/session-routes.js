@@ -127,7 +127,7 @@ router.patch('/:sessionId/accept', function (req, res) {
 
 router.patch('/:sessionId/reject', function (req, res) {
     res.set("Content-type", "application/json");
-    console.log('About to accept a session: <' + JSON.stringify(req.body) + '>');
+    console.log('About to reject a session: <' + JSON.stringify(req.body) + '>');
 
     var token = req.body.token; // token will be validated once database is ready
     var mentorId = req.body.mentorId;
