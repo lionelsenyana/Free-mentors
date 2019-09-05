@@ -4,16 +4,31 @@
 <head>
   <style>
     body {
-      background-color: #AF877F;
+      background-image: url("../assets/image_background.jpg");
+      background-size: cover;
+      background-position: center;
     }
 
     h2 {
       color: solid black;
       text-align: center;
     }
-
+    .container {
+      background-color: black;
+      opacity: 0.8;
+      padding-top: 50px;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-bottom: 20px;
+      text-align: center;
+    }
     #loginSection {
       text-align: center;
+      border: 2px solid orange;
+      width: 45%;
+      background-color: orange;
+      display: inline-block;
+      margin-bottom: 220px;
     }
 
     label,
@@ -27,15 +42,21 @@
     }
 
     input {
-      width: 40%;
+      width: 400px;
       margin-top: 10px;
       padding: 5px 5px;
+      font-weight: bold;
     }
-
+    #footer {
+      text-align: center;
+      color: white;
+      padding-bottom: 15px;
+    }
     button {
       margin-top: 30px;
       text-align: center;
       padding: 10px 50px;
+      margin-bottom: 20px;
     }
   </style>
 
@@ -48,71 +69,81 @@
       } else if ( ! userNameEmail.includes("@")) {
         alert("Your email is missing'@'");
         return false;
-      } else if(userNameEmail !== JSON.parse(localStorage.getItem('user')).email
-          && userNameEmail !== JSON.parse(localStorage.getItem('mentor')).email
-          && userNameEmail !== JSON.parse(localStorage.getItem('admin')).email ) {
-            alert("Invalid credentials");
-            return false;
-      }
+      } 
 
       var password =
         document.getElementById("password").value;
-      if (checkPassword(password) == false) {
-        return false;
-      }
-
-      /*
-       * Validate using locally stored data, since the Database is not ready yet:
-       */
-      var user = JSON.parse(localStorage.getItem('user'));
-      var mentor = JSON.parse(localStorage.getItem('mentor'));
-      var admin = JSON.parse(localStorage.getItem('admin'));
-      var credentialsErrorMessage = "Invalid credentials";
-
-      if(user && user.email == userNameEmail) {
-        if(user.password !== password) {
-          alert(credentialsErrorMessage);
-          return false;
-        }
-      } else if(mentor && mentor.email == userNameEmail) {
-        if(mentor.password !== password) {
-          alert(credentialsErrorMessage);
-          return false;
-        }
-      } else if(admin && admin.email == userNameEmail) {
-        if(admin.password !== password) {
-          alert(credentialsErrorMessage);
-          return false;
-        } 
-      }
-
-      window.location.assign("all-users.html");
-      
-      // return true; // this will signal for the form to submit. Comming up later on...
-    }
-
-    function checkPassword(password) {
       if ( ! password) {
         alert("Missing Password");
         return false;
       } 
-      return true;
+
+      /*
+       * prepare and make RESTful AJAX call for user sign in:
+       */
+       var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if(this.readyState == 4) { // Response came back when ready state is 4
+          if (this.status == 200) { // Response came back with success, user is successfully logged in
+            console.log("Message after user sign in: <" + this.responseText + ">");
+            var userSignedIn = JSON.parse(this.responseText);
+            if(userSignedIn && userSignedIn.status == 200) {
+              localStorage.setItem("token", userSignedIn.data.token);
+              window.location.assign("all-users.html");
+            }
+          } else if(this.status == 401) {
+            alert("Invalid credentials");
+          }
+        }
+      };
+
+      xhttp.open("POST", "/api/v1/auth/signin", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+
+       /*
+       * Follows JSON request object as indicated on page 13 of ADC pdf document.
+       * For now, this project is considering a few fields but others will be added later.
+       * Request format as indicated:
+       * {
+       *  "firstName": String,
+       *  "lastName": String,
+       *  "email": String,
+       *  "password": String,
+       *  "address": String,
+       *  "bio": String,
+       *  "occupation": String,
+       *  "expertise": String,
+       *  ...
+       * }
+       */
+      var newUser = {};
+      newUser.email = userNameEmail;
+      newUser.password = password;
+
+      xhttp.send(JSON.stringify(newUser));
     }
   </script>
 </head>
 
 <body>
-  <div id="loginSection">
-    <h2>Sign in</h2>
-    <form>
-      <label>User name/Email:</label>
-      <input type="text" id="userNameEmail">
-      <br>
-      <label>Password:</label>
-      <input type="password" id="password">
-      <br>
-      <button onclick=validateAndSubmit() type="button" id="logIn">Log in</button>
-    </form>
+  <div class="container">
+    <div id="loginSection">
+      <h2>Sign in</h2>
+      <form>
+        <input type="text" placeholder="Email" id="userNameEmail">
+        <br>
+        <input type="password" placeholder="password" id="password">
+        <br>
+        <button onclick=validateAndSubmit() type="button" id="logIn">Log in</button>
+      </form>
+    </div>
+    <p id="footer">
+      
+        <small>
+          copyright 2019 by Lionel Senyana
+        </small>
+      
+    </p>
   </div>
 </body>
 

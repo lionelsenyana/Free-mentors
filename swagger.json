@@ -1,0 +1,399 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Free-Mentor",
+        "description": "Free Mentors is a social initiative to provide free mentorship sessions.",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Authorization",
+            "description": "user registration"
+        },
+        {
+            "name": "Users",
+            "description": "user registration"
+        },
+        {
+            "name": "Mentors",
+            "description": "Mentor user"
+        },
+        {
+            "name": "Sessions",
+            "description": "Manage sessions"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "create new user",
+                "parameters": [
+                    {
+                        "name": "users",
+                        "in": "body",
+                        "description": "user provide input",
+                        "schema": {
+                            "$ref": "#definitions/signup"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User succesfuly created"
+                    },
+                    "401": {
+                        "description": "Authentication error"
+                    }
+                }
+            }
+        },
+        "/auth/signin": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "login new user",
+                "parameters": [
+                    {
+                        "name": "users",
+                        "in": "body",
+                        "description": "user provide input",
+                        "schema": {
+                            "$ref": "#definitions/signin"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User is successfully logged in"
+                    },
+                    "401": {
+                        "description": "Authentication error"
+                    }
+                }
+            }
+        }
+    },
+    "/user/:userId": {
+        "patch": {
+            "tags": [
+                "Users"
+            ],
+            "summary": "change user to a mentor",
+            "parameters": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                        "$ref": "#definitions/users"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "User account changed to a mentor"
+                },
+                "401": {
+                    "description": "Failed changing user to mentor. User is not authenticated"
+                }
+            }
+        }
+    },
+    "/mentor/mentors": {
+        "get": {
+            "tags": [
+                "mentors"
+            ],
+            "summary": "About to read all mentors",
+            "parameters": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                        "$ref": "#definitions/mentors"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "User is not authenticated"
+                }
+            }
+        }
+    },
+    "/mentor/:mentorId": {
+        "get": {
+            "tags": [
+                "mentors"
+            ],
+            "summary": "About to read a specific mentor with Id",
+            "parameters": [
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                        "$ref": "#definitions/mentors/mentorId"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "User is not authenticated"
+                }
+            }
+        }
+    },
+    "/sessions": {
+        "post": {
+            "tags": [
+                "sessions"
+            ],
+            "summary": "About to create a mentorship session",
+            "parameters": [
+                {
+                    "name": "users",
+                    "in": "body",
+                    "description": "user provide input",
+                    "schema": {
+                        "$ref": "#definitions/sessions"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "Unable to create session"
+                }
+            }
+        }
+    },
+    "/sessions/:sessionId/accept": {
+        "patch": {
+            "tags": [
+                "sessions"
+            ],
+            "summary": "About to accept a session",
+            "parameters": [
+                {
+                    "name": "users",
+                    "in": "body",
+                    "description": "user provide input",
+                    "schema": {
+                        "$ref": "#definitions/sessions/accept"
+                    }
+                },
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                        "$ref": "#definitions/sessions/accept"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "Unable to accept a session"
+                }
+            }
+        }
+    },
+    "/sessions/:sessionId/reject": {
+        "patch": {
+            "tags": [
+                "sessions"
+            ],
+            "summary": "About to reject a session",
+            "parameters": [
+                {
+                    "name": "users",
+                    "in": "body",
+                    "description": "user provide input",
+                    "schema": {
+                        "$ref": "#definitions/sessions/reject"
+                    }
+                },
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                        "$ref": "#definitions/sessions"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "Unable to reject a session"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "signup": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "signin": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "users": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "mentors": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "mentors/mentorId": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "sessions": {
+            "required": [
+                "mentorId",
+                "questions"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "sessions/accept": {
+            "required": [
+                "mentorId",
+                "sessionId"
+            ],
+            "type": "object",
+            "properties": {
+                "mentorId": {
+                    "type": "string"
+                },
+                "sessionId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "sessions/reject": {
+            "required": [
+                "mentorId",
+                "sessionId"
+            ],
+            "type": "object",
+            "properties": {
+                "mentorId": {
+                    "type": "string"
+                },
+                "sessionId": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}   
+    

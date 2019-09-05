@@ -1,24 +1,52 @@
 body {
-  background-color: #AF877F;
+  background-image: url("/UI/assets/image_background.jpg");
+  background-size: cover;
+  background-position: center;
 }
-
+.indexContainer {
+background-color: black;
+opacity: 0.8;
+padding-top: 50px;
+padding-left: 50px;
+padding-right: 50px;
+}
 h2 {
-  color: solid black;
+  color: yellow;
   text-align: center;
+  font-size: 400%;
 }
-
-p {
-  color: solid grey;
+h5 {
+  color:white;
   text-align: center;
+  font-size: 200%;
+}
+#footer {
+  
+  text-align: center;
+  color: white;
+  padding-bottom: 15px
 }
 
 input {
   width: 10%;
   margin-top: 30px;
   margin-left: 100px;
+  margin-bottom: 30px;
   padding: 5px 5px;
+  background-color: lightgrey;
+  border: 1px solid black;
+}
+.signin{
+  color: solid black;
+  font-weight: bold;
+}
+.signup{
+  background-color: rgb(43, 142, 223);
+  color:white;
+  font-weight: bold;
 }
 
 #landingPageSection {
   text-align: center;
+  margin-bottom: 80px
 }

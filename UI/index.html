@@ -2,20 +2,33 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="./css/app.css">
-  <script src="./js/freementor.js"></script>
+  <link rel="stylesheet" type="text/css" href="../UI/css/app.css">
+  
 </head>
 
 <body>
-  <div id="landingPageSection">
-    <h2>This is Free Mentor</h2>
-    <p>Free Mentors is a social initiative where accomplished professionals become role models to
-      young people to provide free mentorship sessions.</p>
-    <input type="button" value="Sign in" id="signIn" onclick="processForSignin()" />
-
-    <input type="button" value="Sign up" id="signUp" onclick="processForSignup()" />
+  <div class="indexContainer">
+    <div class="grid-container">
+      <div class="item1">
+        <h2>This is Free Mentor</h2>
+        <h5>Free Mentors is a social initiative where accomplished professionals become role models to
+          young people to provide free mentorship sessions.</h5>
+      </div>
+    </div>
+    <div id="landingPageSection">
+      <input class="signin" type="button" value="Sign in" id="signIn" onclick="processForSignin()" />
+      <input class="signup" type="button" value="Sign up" id="signUp" onclick="processForSignup()" />
+    </div>
+    <p id="footer">
+      
+        <small>
+          copyright 2019 by Lionel Senyana
+        </small>
+      
+    </p>
   </div>
-
+  
+  <script src="../UI/js/freementor.js"></script>
 </body>
 
 </html>
