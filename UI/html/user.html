@@ -4,22 +4,67 @@
 <head>
   <style>
     body {
-      background-color: #AF877F;
+      background-image: url("../assets/image_background.jpg");
+      background-size: cover;
+      background-position: center;
     }
 
     h2 {
       color: solid black;
       text-align: center;
     }
-
+    .container {
+      background-color: black;
+      opacity: 0.8;
+      padding-top: 50px;
+      padding-bottom: 20px;
+      text-align: center;
+      height: auto;
+      width:90%;
+      display: flex;
+      padding-left: 10%;
+    }
+    .description {
+      margin-top: 10px;
+      width: 60%;
+      height: auto;
+      background-color: grey;
+      margin-bottom: 220px;
+      padding-bottom: 0px; 
+    }
+    .description iframe{
+      width: 99%;
+      height: 500px;
+    }
     input {
       width: 30%;
       margin-top: 30px;
       padding: 5px 5px;
     }
+    .vertical-menu a{
+      padding: 2px 30px;
+      line-height: 40px; 
+      font-size: 20px;
+      font-weight: bold;
+    }
 
     #inputSection {
+      margin-top: 10px;
+      border: 2px solid orange;
+      width: 30%;
+      height: auto;
+      background-color: orange;
+      margin-bottom: 220px;
+      padding-bottom: 20px;
+    }
+    #footer {
       text-align: center;
+      color: white;
+      padding-bottom: 15px;
+      background-color: black;
+      opacity: 0.8;
+      margin-top:-0.5px;
+      width: 100%;
     }
   </style>
 
@@ -39,16 +84,33 @@
 </head>
 
 <body>
-  <div id="inputSection">
-    <h2>User</h2>
-    <input type="button" id="viewMentors" value="View mentors" onclick="processViewMentors()" />
-    <br>
-    <input type="button" id="viewSpecificMentors" value="View specific mentor"
-      onclick="processViewSpecificMentors()" />
-    <br>
-    <input type="button" id="createMentorshipSession" value="Create a mentorship session"
-      onclick="processCreateMentorshipSession()" />
+  <div class="container">
+    <div id="inputSection">
+      <h2>User Dashboard</h2>
+      <div class="vertical-menu">
+        <a href="view-mentors.html" target="content">
+          List of mentors
+        </a>
+        <br />
+        <a href="view-specific-mentors.html" target="content">
+          List of specicif mentors
+        </a>
+        <br />
+        <a href="create-mentorship-session.html" target="content">
+          Create mentorship sessions
+        </a>
+        <br>
+      </div>
+    </div>
+    <div class="description"><iframe name="content"></iframe>
+    </div>
   </div>
+  <p id="footer">
+            
+      <small>
+            copyright 2019 by Lionel Senyana
+      </small>
+</p>
 </body>
 
 </html>
