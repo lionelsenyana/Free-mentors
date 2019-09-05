@@ -51,7 +51,7 @@
                         "in": "body",
                         "description": "user provide input",
                         "schema": {
-                        "$ref": "#definitions/signup"
+                            "$ref": "#definitions/signup"
                         }
                     }
                 ],
@@ -80,7 +80,7 @@
                         "in": "body",
                         "description": "user provide input",
                         "schema": {
-                        "$ref": "#definitions/signin"
+                            "$ref": "#definitions/signin"
                         }
                     }
                 ],
@@ -99,7 +99,7 @@
         }
     },
     "/user/:userId": {
-        "post": {
+        "patch": {
             "tags": [
                 "Users"
             ],
@@ -110,7 +110,7 @@
                     "in": "header",
                     "description": "user token",
                     "schema": {
-                    "$ref": "#definitions/users"
+                        "$ref": "#definitions/users"
                     }
                 }
             ],
@@ -139,7 +139,7 @@
                     "in": "header",
                     "description": "user token",
                     "schema": {
-                    "$ref": "#definitions/mentors"
+                        "$ref": "#definitions/mentors"
                     }
                 }
             ],
@@ -168,7 +168,7 @@
                     "in": "header",
                     "description": "user token",
                     "schema": {
-                    "$ref": "#definitions/mentors"
+                        "$ref": "#definitions/mentors/mentorId"
                     }
                 }
             ],
@@ -185,19 +185,56 @@
             }
         }
     },
-    "/session/:mentorId": {
-        "get": {
+    "/sessions": {
+        "post": {
             "tags": [
-                "mentors"
+                "sessions"
             ],
-            "summary": "About to read a specific mentor with Id",
+            "summary": "About to create a mentorship session",
             "parameters": [
+                {
+                    "name": "users",
+                    "in": "body",
+                    "description": "user provide input",
+                    "schema": {
+                        "$ref": "#definitions/sessions"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "Unable to create session"
+                }
+            }
+        }
+    },
+    "/sessions/:sessionId/accept": {
+        "patch": {
+            "tags": [
+                "sessions"
+            ],
+            "summary": "About to accept a session",
+            "parameters": [
+                {
+                    "name": "users",
+                    "in": "body",
+                    "description": "user provide input",
+                    "schema": {
+                        "$ref": "#definitions/sessions/accept"
+                    }
+                },
                 {
                     "name": "token",
                     "in": "header",
                     "description": "user token",
                     "schema": {
-                    "$ref": "#definitions/mentors"
+                        "$ref": "#definitions/sessions/accept"
                     }
                 }
             ],
@@ -209,15 +246,48 @@
                     "description": ""
                 },
                 "401": {
-                    "description": "User is not authenticated"
+                    "description": "Unable to accept a session"
                 }
             }
         }
     },
-
-
-
-
+    "/sessions/:sessionId/reject": {
+        "patch": {
+            "tags": [
+                "sessions"
+            ],
+            "summary": "About to reject a session",
+            "parameters": [
+                {
+                    "name": "users",
+                    "in": "body",
+                    "description": "user provide input",
+                    "schema": {
+                        "$ref": "#definitions/sessions/reject"
+                    }
+                },
+                {
+                    "name": "token",
+                    "in": "header",
+                    "description": "user token",
+                    "schema": {
+                        "$ref": "#definitions/sessions"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": ""
+                },
+                "401": {
+                    "description": "Unable to reject a session"
+                }
+            }
+        }
+    },
     "definitions": {
         "signup": {
             "required": [
@@ -226,14 +296,104 @@
             ],
             "type": "object",
             "properties": {
-                "email" : {
+                "email": {
                     "type": "string"
                 },
                 "password": {
-                    "type":"string"
+                    "type": "string"
+                }
+            }
+        },
+        "signin": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "users": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "mentors": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "mentors/mentorId": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "sessions": {
+            "required": [
+                "mentorId",
+                "questions"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "sessions/accept": {
+            "required": [
+                "mentorId",
+                "sessionId"
+            ],
+            "type": "object",
+            "properties": {
+                "mentorId": {
+                    "type": "string"
+                },
+                "sessionId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "sessions/reject": {
+            "required": [
+                "mentorId",
+                "sessionId"
+            ],
+            "type": "object",
+            "properties": {
+                "mentorId": {
+                    "type": "string"
+                },
+                "sessionId": {
+                    "type": "integer"
                 }
             }
         }
     }
+}   
     
-}
